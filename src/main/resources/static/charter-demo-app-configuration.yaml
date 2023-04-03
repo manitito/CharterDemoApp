@@ -1,0 +1,304 @@
+openapi: "3.0.3"
+
+info:
+  title: Charter demo APP
+  description: This API provides endpoints for managing managing transactions and calculate points for transaction.
+  version: "1.0"
+
+servers:
+  - url: "/v1"
+    description: Current API version.
+
+tags:
+  - name: charter-demo-app
+    description: Endpoints for managing client transaction
+
+paths:
+  /transactions/{transactionId}:
+    get:
+      tags:
+        - Transactions
+      summary: Get transaction by Id
+      description: Returns transaction.
+      operationId: transactionById
+      parameters:
+        - $ref: '#/components/parameters/TransactionId'
+      responses:
+        "200":
+          $ref: "#/components/responses/TransactionResponse"
+
+    delete:
+      tags:
+        - Transactions
+      summary: Delete a transaction
+      description: Delete a transaction by ID.
+      operationId: deleteTransaction
+      parameters:
+        - $ref: '#/components/parameters/TransactionId'
+      responses:
+        "204":
+          description: No content
+        "404":
+          description: Transaction not found
+
+    put:
+      tags:
+        - Transactions
+      summary: Update a transaction
+      description: Update a transaction by ID.
+      operationId: updateTransaction
+      parameters:
+        - $ref: '#/components/parameters/TransactionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionInput'
+      responses:
+        "204":
+          description: No content
+        "404":
+          description: Transaction not found
+
+  /transactions:
+    get:
+      tags:
+        - Transactions
+      summary: Get list of all transactions
+      description: Returns list of all created transactions.
+      operationId: listTransactions
+      responses:
+        "200":
+          $ref: "#/components/responses/TransactionsListResponse"
+
+  /transactions/stats:
+    get:
+      tags:
+        - Transactions
+      summary: Get list of transaction stats
+      description: Returns reward points earned for each customer per month and total.
+      operationId: listTransactionsStats
+      parameters:
+        - $ref: "#/components/parameters/DateStart"
+        - $ref: "#/components/parameters/DateEnd"
+      responses:
+        "200":
+          $ref: "#/components/responses/TransactionsStatsResponse"
+
+  /customers:
+    post:
+      tags:
+        - Customers
+      summary: Create new customer
+      description: This endpoint create new customer.
+      operationId: createCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomerRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/CreateCustomerResponse"
+
+  /customers/{customerId}/transactions:
+    post:
+      tags:
+        - Customers
+      summary: Create new transaction
+      description: This endpoint creates new transaction.
+      operationId: createTransaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTransactionRequest"
+      parameters:
+        - $ref: "#/components/parameters/CustomerId"
+      responses:
+        "200":
+          $ref: "#/components/responses/TransactionResponse"
+
+components:
+  responses:
+    TransactionResponse:
+      description: Transaction was successfully created.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionResponse"
+
+    TransactionsListResponse:
+      description: Returns list of all created transactions.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionsListResponse"
+
+    TransactionsStatsResponse:
+      description: Returns reward points earned for each customer per month and total.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionsStatsResponse"
+
+    CreateCustomerResponse:
+      description: Customer was successfully created.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateCustomerResponse"
+
+  schemas:
+    CreateTransactionRequest:
+      $ref: "#/components/schemas/TransactionDetails"
+
+    CreateCustomerRequest:
+      $ref: "#/components/schemas/CustomerDetails"
+
+    TransactionResponse:
+      type: object
+      properties:
+        dateCreated:
+          type: string
+          description: ISO 8601 Time when the transaction was created.
+          format: date-time
+        customerId:
+          type: integer
+          format: int64
+          description: Customer id determines who created the transaction.
+          example: 123
+        points:
+          type: integer
+          description: Points awarded from transaction.
+          example: 125
+
+    StatsResponse:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          description: Customer id determines who created the transaction.
+          example: 1
+        totalPoints:
+          type: integer
+          example: 123
+        monthly:
+          type: array
+          items:
+            $ref: "#/components/schemas/MonthRewardDetails"
+
+    TransactionsListResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/TransactionResponse"
+
+    TransactionsStatsResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/StatsResponse"
+
+    TransactionDetails:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Amount of transaction.
+          example: 1000
+      required:
+        - amount
+
+    TransactionInput:
+      type: object
+      properties:
+        dateCreated:
+          type: string
+          format: date-time
+        amount:
+          type: integer
+        points:
+          type: integer
+      required:
+        - dateCreated
+        - amount
+        - points
+
+    CreateCustomerResponse:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          description: Returns created customer id.
+          example: 123
+          format: int64
+
+    CustomerDetails:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John
+        lastname:
+          type: string
+          example: Doe
+      required:
+        - name
+        - lastname
+
+    MonthRewardDetails:
+      type: object
+      properties:
+        month:
+          type: string
+          example: DECEMBER
+        points:
+          type: integer
+          example: 123
+
+  parameters:
+    CustomerId:
+      in: path
+      name: customerId
+      description: Customer identifier.
+      example: 123
+      required: true
+      schema:
+        type: integer
+        format: int64
+
+    TransactionId:
+      in: path
+      name: transactionId
+      description: Transaction identifier.
+      example: 1
+      required: true
+      schema:
+        type: integer
+        format: int64
+
+    DateStart:
+      in: query
+      name: dateStart
+      description: Date start.
+      example: 02.03.2023
+      required: true
+      schema:
+        type: string
+        format: date
+        example: "02-03-2023"
+
+    DateEnd:
+      in: query
+      name: dateEnd
+      description: Date end.
+      example: 02.04.2023
+      required: true
+      schema:
+        type: string
+        format: date
+        example: "02-04-2023"
+

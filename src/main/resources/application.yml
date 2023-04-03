@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: charter-demo-app
+    version: 0.0.1-SNAPSHOT
+
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+
+api:
+  prefix: "/v1"
+
+#springdoc:
+#  swagger-ui:
+#    csrf:
+#      enabled: true
+## uncomment for production version and make application-local.yaml profile
+##    disable-swagger-default-url: true
+#    urls:
+#      - url: /charter-demo-app-configuration.yaml
+#        name: Charter transactions
+#    urls-primary-name: charter-transaction-configuration
+
+
