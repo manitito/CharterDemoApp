@@ -1,9 +1,5 @@
-package com.charter.charterdemoapp.customer.service;
+package com.charter.charterdemoapp.customer;
 
-import com.charter.charterdemoapp.customer.Customer;
-import com.charter.charterdemoapp.customer.CustomerMapper;
-import com.charter.charterdemoapp.customer.CustomerRepository;
-import com.charter.charterdemoapp.customer.CustomerService;
 import com.charter.charterdemoapp.model.CustomerDetails;
 import com.charter.charterdemoapp.model.TransactionDetails;
 import com.charter.charterdemoapp.transactions.Transaction;

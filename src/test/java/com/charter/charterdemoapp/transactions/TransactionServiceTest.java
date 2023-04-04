@@ -1,12 +1,8 @@
-package com.charter.charterdemoapp.transactions.service;
+package com.charter.charterdemoapp.transactions;
 
 import com.charter.charterdemoapp.customer.Customer;
 import com.charter.charterdemoapp.model.MonthRewardDetails;
 import com.charter.charterdemoapp.model.StatsResponse;
-import com.charter.charterdemoapp.transactions.Transaction;
-import com.charter.charterdemoapp.transactions.TransactionDataMock;
-import com.charter.charterdemoapp.transactions.TransactionRepository;
-import com.charter.charterdemoapp.transactions.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

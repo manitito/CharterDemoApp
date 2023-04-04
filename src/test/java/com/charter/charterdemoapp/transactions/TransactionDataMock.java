@@ -17,7 +17,6 @@ public class TransactionDataMock {
                 new Transaction(120, 90, OffsetDateTime.now(), Customer.builder().id(1L).name("John").lastname("Doe").build()));
     }
 
-
     public List<StatsResponse> mockStatus() {
         return List.of(new StatsResponse().customerId(1L).totalPoints(450).monthly(
                         List.of(new MonthRewardDetails().month(Month.APRIL.name()).points(200),
