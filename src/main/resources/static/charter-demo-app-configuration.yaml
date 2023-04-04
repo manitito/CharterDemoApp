@@ -283,22 +283,22 @@ components:
     DateStart:
       in: query
       name: dateStart
-      description: Date start.
-      example: 02.03.2023
+      description: Date start - format yyyy-MM-dd.
+      example: 2023-04-02
       required: true
       schema:
         type: string
         format: date
-        example: "02-03-2023"
+        example: 2023-04-02
 
     DateEnd:
       in: query
       name: dateEnd
-      description: Date end.
-      example: 02.04.2023
+      description: Date end - format yyyy-MM-dd.
+      example: 2024-04-02
       required: true
       schema:
         type: string
         format: date
-        example: "02-04-2023"
+        example: 2024-04-02
 

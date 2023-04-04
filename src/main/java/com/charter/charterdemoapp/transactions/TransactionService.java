@@ -78,7 +78,7 @@ public class TransactionService {
     private List<MonthRewardDetails> calculateMonthlyRewardDetails(Map<Month, List<Transaction>> transactionsPerMonth) {
         List<MonthRewardDetails> monthRewardDetails = new ArrayList<>();
         transactionsPerMonth.forEach((month, transactionList) -> monthRewardDetails.add(new MonthRewardDetails()
-                .month(String.valueOf(month))
+                .month(month.name())
                 .points(calculateTotalPoints(transactionList))));
         return monthRewardDetails;
     }

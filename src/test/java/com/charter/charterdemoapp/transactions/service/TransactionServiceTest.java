@@ -4,9 +4,9 @@ import com.charter.charterdemoapp.customer.Customer;
 import com.charter.charterdemoapp.model.MonthRewardDetails;
 import com.charter.charterdemoapp.model.StatsResponse;
 import com.charter.charterdemoapp.transactions.Transaction;
+import com.charter.charterdemoapp.transactions.TransactionDataMock;
 import com.charter.charterdemoapp.transactions.TransactionRepository;
 import com.charter.charterdemoapp.transactions.TransactionService;
-import com.charter.charterdemoapp.transactions.TransationMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TransactionServiceTest {
 
-    private final TransationMock transationMock = new TransationMock();
+    private final TransactionDataMock transactionDataMock = new TransactionDataMock();
     @InjectMocks
     TransactionService service;
     @Mock
@@ -36,7 +36,7 @@ public class TransactionServiceTest {
     @Test
     void shouldReturnAllTransactionsList() {
         //given
-        when(repository.findAll()).thenReturn(transationMock.mockTransactionList());
+        when(repository.findAll()).thenReturn(transactionDataMock.mockTransactionList());
 
         //when
         List<Transaction> transactionList = service.getTransactionsList();
