@@ -18,15 +18,4 @@ spring:
 api:
   prefix: "/v1"
 
-#springdoc:
-#  swagger-ui:
-#    csrf:
-#      enabled: true
-## uncomment for production version and make application-local.yaml profile
-##    disable-swagger-default-url: true
-#    urls:
-#      - url: /charter-demo-app-configuration.yaml
-#        name: Charter transactions
-#    urls-primary-name: charter-transaction-configuration
-
 
