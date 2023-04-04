@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -86,6 +87,7 @@ public class TransactionService {
         transactionRepository.deleteById(transactionId);
     }
 
+    @Transactional
     public void update(Long transactionId, TransactionInput transactionInput) {
         validator.validateAmount(transactionInput.getAmount());
         Transaction transaction = transactionRepository.findById(transactionId).orElseThrow(() -> {
