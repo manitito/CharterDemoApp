@@ -3,7 +3,6 @@ package com.charter.charterdemoapp.transactions;
 import com.charter.charterdemoapp.model.MonthRewardDetails;
 import com.charter.charterdemoapp.model.StatsResponse;
 import com.charter.charterdemoapp.model.TransactionInput;
-import com.charter.charterdemoapp.model.TransactionResponse;
 import com.charter.charterdemoapp.validator.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,14 +26,13 @@ import static com.charter.charterdemoapp.transactions.utils.DateTransformer.loca
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
-    private final TransactionMapper transactionMapper;
     private final Validator validator;
 
-    public TransactionResponse findById(long id) {
-        return transactionMapper.sourceToDestination(transactionRepository.findById(id).orElseThrow(() -> {
+    public Transaction findById(long id) {
+        return transactionRepository.findById(id).orElseThrow(() -> {
             log.warn("Transaction not found for transaction:" + id);
             return new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found");
-        }));
+        });
     }
 
     public List<Transaction> getTransactionsList() {

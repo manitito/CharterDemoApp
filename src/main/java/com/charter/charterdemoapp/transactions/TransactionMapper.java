@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TransactionMapper {
     @Mapping(target = "customerId", source = "id")
-    TransactionResponse sourceToDestination(Transaction transaction);
+    TransactionResponse map(Transaction transaction);
 
     List<TransactionResponse> mapList(List<Transaction> transactionsList);
 }

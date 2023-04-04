@@ -35,7 +35,7 @@ public class TransactionController implements TransactionsApi {
 
     @Override
     public ResponseEntity<TransactionResponse> transactionById(Long transactionId) {
-        return ResponseEntity.ok(service.findById(transactionId));
+        return ResponseEntity.ok(transactionMapper.map(service.findById(transactionId)));
     }
 
     @Override
