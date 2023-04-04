@@ -41,7 +41,7 @@ application will start
 goto the browser and use
 link [http://127.0.0.1:8080/swagger-ui/index.html#](http://127.0.0.1:8080/swagger-ui/index.html#)
 
-## how run in Intelij
+## how run in IntelliJ
 
 Go to configuration
 
