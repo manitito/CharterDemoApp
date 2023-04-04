@@ -22,12 +22,18 @@ Download and setup java version 20
 
 ```
     mvn clean install
+    if you havent maven
+    ./mvnw clean install
+
 ```
 
 * go to localRepository '.m2\repository\com\charter\CharterDemoApp\0.0.1-SNAPSHOT\' and run:
 
 ```
     java -jar CharterDemoApp-0.0.1-SNAPSHOT.jar
+    
+    or in project directory run
+    ./mvnw spring-boot:run
 ```
 
 application will start
@@ -43,7 +49,7 @@ Go to configuration
 
 Create configuration and run application
 
-![img.png](documentation/img.png)
+![img_1.png](documentation/img_1.png)
 
 application will start
 
