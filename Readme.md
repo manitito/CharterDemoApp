@@ -51,7 +51,7 @@ Create configuration and run application
 
 ![img_1.png](documentation/img_1.png)
 
-application will start
+Run application by play button and will start
 
 goto the browser and use
 link [http://127.0.0.1:8080/swagger-ui/index.html#](http://127.0.0.1:8080/swagger-ui/index.html#)
