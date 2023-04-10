@@ -46,10 +46,10 @@ class TransactionControllerTest {
                         .get("/v1/transactions"))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").value(hasSize(3)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[*].dateCreated").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[*].customerId").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[*].points").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[*].dateCreated").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].customerId").value(0))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].points").value(90));
     }
@@ -79,8 +79,8 @@ class TransactionControllerTest {
                         .queryParam("dateEnd", "2024-04-04"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[*].customerId").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").value(hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[*].customerId").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].customerId").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].totalPoints").value(450))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].monthly").isArray())
