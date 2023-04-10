@@ -22,7 +22,7 @@ Download and setup java version 20
 
 ```
     mvn clean install
-    if you havent maven
+    if you do not have maven
     ./mvnw clean install
 
 ```
